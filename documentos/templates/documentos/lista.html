@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Seus documentos - DocIA{% endblock %}
+
+{% block content %}
+    <h1>Seus documentos</h1>
+    <p class="meta">
+        {% if documentos %}
+            {{ documentos|length }} documento{{ documentos|length|pluralize }} enviado{{ documentos|length|pluralize }}.
+        {% else %}
+            Nenhum documento enviado ainda.
+        {% endif %}
+    </p>
+
+    {% if documentos %}
+        <ul class="doc-list">
+            {% for documento in documentos %}
+                <li>
+                    <a class="doc-row" href="{% url 'detalhe_documento' documento.pk %}">
+                        <span class="doc-title">{{ documento.titulo }}</span>
+                        <span class="badge badge--{{ documento.status_ia }}">{{ documento.get_status_ia_display }}</span>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="empty-state">Envie seu primeiro documento para começar.</p>
+    {% endif %}
+
+    <div class="actions">
+        <a class="btn btn-primary" href="{% url 'upload_documento' %}">Enviar novo documento</a>
+    </div>
+{% endblock %}

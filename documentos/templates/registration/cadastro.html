@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Criar conta - DocIA{% endblock %}
+{% block hero_tagline %}<p class="hero__tagline">Crie sua conta para começar.</p>{% endblock %}
+
+{% block content %}
+    <h1>Criar conta</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
+    </form>
+
+    <p style="margin-top: 1.5rem;">
+        Já tem conta? <a href="{% url 'login' %}">Entrar</a>
+    </p>
+{% endblock %}

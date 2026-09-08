@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Enviar documento - DocIA{% endblock %}
+
+{% block content %}
+    <h1>Enviar documento</h1>
+    <p class="meta">Aceita arquivos PDF, DOCX, XLSX ou TXT.</p>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary btn-block">Enviar</button>
+    </form>
+
+    <p style="margin-top: 1.5rem;">
+        <a class="link-muted" href="{% url 'lista_documentos' %}">Voltar para documentos</a>
+    </p>
+{% endblock %}

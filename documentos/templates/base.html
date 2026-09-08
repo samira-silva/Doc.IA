@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}DocIA{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'documentos/css/style.css' %}">
+</head>
+<body>
+    <header class="hero">
+        <div class="hero__inner">
+            <a class="brand" href="{% url 'lista_documentos' %}">
+                <svg class="brand__mark" width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <rect x="6" y="3" width="18" height="24" rx="3" fill="white" fill-opacity="0.16"/>
+                    <rect x="6.5" y="3.5" width="17" height="23" rx="2.5" stroke="white" stroke-opacity="0.55"/>
+                    <path d="M10 11h10M10 15.5h10M10 20h6" stroke="white" stroke-width="1.4" stroke-linecap="round"/>
+                    <path d="M26 6.5l1.1 2.4 2.4 1.1-2.4 1.1-1.1 2.4-1.1-2.4-2.4-1.1 2.4-1.1z" fill="white"/>
+                </svg>
+                <span class="brand__wordmark">DocIA</span>
+            </a>
+            {% if user.is_authenticated %}
+                <div class="session">
+                    <span class="session__user">{{ user.username }}</span>
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-logout">Sair</button>
+                    </form>
+                </div>
+            {% endif %}
+        </div>
+        {% block hero_tagline %}
+            <p class="hero__tagline">Assistente inteligente de documentos.</p>
+        {% endblock %}
+        {% if user.is_authenticated %}
+            <nav class="hero__nav">
+                <a href="{% url 'lista_documentos' %}">Documentos</a>
+                <a href="{% url 'colecoes_lista' %}">Coleções</a>
+                <a href="{% url 'perguntar' %}">Perguntar</a>
+            </nav>
+        {% endif %}
+    </header>
+
+    <main class="page">
+        <div class="card">
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+</body>
+</html>

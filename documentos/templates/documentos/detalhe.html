@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ documento.titulo }} - DocIA{% endblock %}
+
+{% block content %}
+    <a class="link-muted" href="{% url 'lista_documentos' %}">Voltar para documentos</a>
+
+    <h1 style="margin-top: 1rem;">{{ documento.titulo }}</h1>
+    <p class="meta">Enviado em {{ documento.criado_em|date:"d/m/Y H:i" }}</p>
+
+    <div class="actions">
+        <a class="btn btn-outline" href="{{ documento.arquivo.url }}">Baixar original</a>
+        <a class="btn btn-outline" href="{% url 'editar_documento' documento.pk %}">Editar</a>
+        <a class="btn btn-outline btn-outline--danger" href="{% url 'excluir_documento' documento.pk %}">Excluir</a>
+    </div>
+
+    <h2>Análise de IA</h2>
+    <p><span class="badge badge--{{ documento.status_ia }}">{{ documento.get_status_ia_display }}</span></p>
+
+    {% if documento.status_ia == 'processando' %}
+        <p class="meta">Analisando o documento, aguarde...</p>
+    {% elif documento.status_ia == 'erro' %}
+        <p class="error-text">{{ documento.erro_ia }}</p>
+    {% elif documento.status_ia == 'concluido' %}
+        <p class="meta">Analisado em {{ documento.analisado_em|date:"d/m/Y H:i" }}</p>
+        <div class="summary">{{ documento.resumo|linebreaks }}</div>
+    {% endif %}
+
+    <form method="post" action="{% url 'analisar_documento' documento.pk %}" style="margin-top: 1.5rem;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary btn-block">
+            {% if documento.status_ia == 'concluido' %}Analisar novamente{% else %}Analisar com IA{% endif %}
+        </button>
+    </form>
+
+    {% if documento.formato_destino %}
+        <h2>Converter para {{ documento.formato_destino }}</h2>
+        <p><span class="badge badge--{{ documento.status_conversao }}">{{ documento.get_status_conversao_display }}</span></p>
+
+        {% if documento.status_conversao == 'processando' %}
+            <p class="meta">Convertendo o documento, aguarde...</p>
+        {% elif documento.status_conversao == 'erro' %}
+            <p class="error-text">{{ documento.erro_conversao }}</p>
+        {% elif documento.status_conversao == 'concluido' and documento.arquivo_convertido %}
+            <p class="meta">Convertido em {{ documento.convertido_em|date:"d/m/Y H:i" }}</p>
+            <p><a class="btn btn-outline" href="{{ documento.arquivo_convertido.url }}">Baixar arquivo em {{ documento.formato_destino }}</a></p>
+        {% endif %}
+
+        <form method="post" action="{% url 'converter_documento' documento.pk %}" style="margin-top: 1rem;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary btn-block">
+                {% if documento.status_conversao == 'concluido' %}Converter novamente{% else %}Converter para {{ documento.formato_destino }}{% endif %}
+            </button>
+        </form>
+    {% endif %}
+
+    <h2>Perguntas sobre este documento</h2>
+    <p><span class="badge badge--{{ documento.status_indexacao }}">{{ documento.get_status_indexacao_display }}</span></p>
+
+    {% if documento.status_indexacao == 'processando' %}
+        <p class="meta">Preparando o documento para perguntas, aguarde...</p>
+    {% elif documento.status_indexacao == 'erro' %}
+        <p class="error-text">{{ documento.erro_indexacao }}</p>
+    {% elif documento.status_indexacao == 'concluido' %}
+        <p class="meta">Indexado em {{ documento.indexado_em|date:"d/m/Y H:i" }} ({{ documento.chunks.count }} trechos).</p>
+    {% else %}
+        <p class="meta">Ainda não indexado. Isso acontece automaticamente na primeira pergunta, ou você pode preparar agora.</p>
+    {% endif %}
+
+    <div class="actions">
+        <form method="post" action="{% url 'indexar_documento' documento.pk %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-outline">
+                {% if documento.status_indexacao == 'concluido' %}Reindexar{% else %}Preparar para perguntas{% endif %}
+            </button>
+        </form>
+        <a class="btn btn-primary" href="{% url 'perguntar' %}?documento={{ documento.pk }}">Perguntar sobre este documento</a>
+    </div>
+{% endblock %}

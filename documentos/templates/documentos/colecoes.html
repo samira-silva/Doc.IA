@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Coleções - DocIA{% endblock %}
+
+{% block content %}
+    <h1>Coleções</h1>
+    <p class="meta">Agrupe documentos (ex: uma matéria, um projeto) para perguntar sobre todos de uma vez.</p>
+
+    {% if colecoes %}
+        <ul class="doc-list">
+            {% for colecao in colecoes %}
+                <li>
+                    <a class="doc-row" href="{% url 'colecao_editar' colecao.pk %}">
+                        <span class="doc-title">{{ colecao.titulo }}</span>
+                        <span class="meta" style="margin: 0;">{{ colecao.documentos.count }} documento{{ colecao.documentos.count|pluralize }}</span>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="empty-state">Nenhuma coleção criada ainda.</p>
+    {% endif %}
+
+    <div class="actions">
+        <a class="btn btn-primary" href="{% url 'colecao_criar' %}">Nova coleção</a>
+    </div>
+{% endblock %}

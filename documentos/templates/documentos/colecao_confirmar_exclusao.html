@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Excluir {{ colecao.titulo }} - DocIA{% endblock %}
+
+{% block content %}
+    <h1>Excluir coleção</h1>
+    <p class="meta">
+        Tem certeza que deseja excluir a coleção "{{ colecao.titulo }}"? Os documentos não serão apagados, só o agrupamento.
+    </p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger btn-block">Sim, excluir</button>
+    </form>
+
+    <p style="margin-top: 1.5rem;">
+        <a class="link-muted" href="{% url 'colecoes_lista' %}">Cancelar</a>
+    </p>
+{% endblock %}

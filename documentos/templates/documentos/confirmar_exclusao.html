@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Excluir {{ documento.titulo }} - DocIA{% endblock %}
+
+{% block content %}
+    <h1>Excluir documento</h1>
+    <p class="meta">Tem certeza que deseja excluir "{{ documento.titulo }}"? Essa ação não pode ser desfeita.</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger btn-block">Sim, excluir</button>
+    </form>
+
+    <p style="margin-top: 1.5rem;">
+        <a class="link-muted" href="{% url 'detalhe_documento' documento.pk %}">Cancelar</a>
+    </p>
+{% endblock %}

@@ -1,0 +1,500 @@
+/* DocIA — identidade lilás / branco / roxo, em degradê */
+
+:root {
+  --c-white: #ffffff;
+  --c-lilac-50: #f8f3ff;
+  --c-lilac-100: #f0e6ff;
+  --c-lilac-200: #e2ccff;
+  --c-purple-400: #a879f2;
+  --c-purple-500: #8b5cf6;
+  --c-purple-600: #7c3aed;
+  --c-purple-700: #6425c9;
+  --c-purple-900: #3b0764;
+  --c-purple-950: #260449;
+  --c-red: #b3261e;
+
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --radius-card: 22px;
+  --shadow-card: 0 24px 48px -24px rgba(59, 7, 100, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--c-purple-950);
+  background: var(--c-lilac-50);
+  min-height: 100vh;
+}
+
+a {
+  color: var(--c-purple-600);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--c-purple-600);
+  outline-offset: 2px;
+}
+
+/* ---------- Faixa de topo em degradê ---------- */
+
+.hero {
+  background: linear-gradient(135deg, var(--c-purple-900) 0%, var(--c-purple-600) 55%, var(--c-purple-400) 100%);
+  padding: 2.75rem 1.5rem 4.5rem;
+  color: var(--c-lilac-50);
+}
+
+.hero__inner {
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.brand__mark {
+  flex: none;
+}
+
+.brand__wordmark {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.hero__tagline {
+  margin: 0.35rem 0 0;
+  font-size: 0.95rem;
+  color: var(--c-lilac-100);
+  max-width: 30ch;
+}
+
+.hero__nav {
+  display: flex;
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+}
+
+.hero__nav a {
+  color: var(--c-lilac-100);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding-bottom: 0.2rem;
+  margin-right: 1.25rem;
+  border-bottom: 2px solid transparent;
+}
+
+.hero__nav a:last-child {
+  margin-right: 0;
+}
+
+.hero__nav a:hover {
+  color: var(--c-white);
+  border-bottom-color: rgba(255, 255, 255, 0.5);
+}
+
+.session {
+  text-align: right;
+  font-size: 0.9rem;
+  color: var(--c-lilac-100);
+}
+
+.session__user {
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.btn-logout {
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--c-white);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.btn-logout:hover {
+  background: rgba(255, 255, 255, 0.24);
+}
+
+/* ---------- Cartão de conteúdo, sobreposto ao hero ---------- */
+
+.page {
+  max-width: 640px;
+  margin: -3rem auto 4rem;
+  padding: 0 1.5rem;
+}
+
+.card {
+  background: var(--c-white);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 2.25rem 2rem;
+}
+
+.card h1 {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  margin: 0 0 0.3rem;
+  color: var(--c-purple-950);
+}
+
+.card h2 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  margin: 2rem 0 0.75rem;
+  color: var(--c-purple-950);
+}
+
+.meta {
+  color: #6b5a86;
+  font-size: 0.92rem;
+  margin: 0 0 1.25rem;
+}
+
+/* ---------- Formulários ---------- */
+
+form p {
+  margin: 0 0 1.1rem;
+}
+
+label {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--c-purple-900);
+  margin-bottom: 0.35rem;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="file"],
+textarea {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 0.65rem 0.8rem;
+  border: 1.5px solid var(--c-lilac-200);
+  border-radius: 12px;
+  background: var(--c-lilac-50);
+  color: var(--c-purple-950);
+}
+
+input:focus,
+textarea:focus {
+  border-color: var(--c-purple-500);
+  background: var(--c-white);
+}
+
+.helptext {
+  font-size: 0.8rem;
+  color: #7a6a94;
+  margin-top: 0.3rem;
+}
+
+ul.errorlist {
+  list-style: none;
+  margin: 0.3rem 0 0;
+  padding: 0;
+  color: var(--c-red);
+  font-size: 0.85rem;
+}
+
+/* Lista de checkboxes/radios gerada pelo Django (CheckboxSelectMultiple, RadioSelect) */
+form ul:not(.errorlist) {
+  list-style: none;
+  margin: 0.3rem 0 0;
+  padding: 0.75rem;
+  border: 1.5px solid var(--c-lilac-200);
+  border-radius: 12px;
+  background: var(--c-lilac-50);
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+form ul:not(.errorlist) li {
+  padding: 0.3rem 0;
+}
+
+form ul:not(.errorlist) label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+form ul:not(.errorlist) input[type="checkbox"],
+form ul:not(.errorlist) input[type="radio"] {
+  width: auto;
+  accent-color: var(--c-purple-600);
+}
+
+/* ---------- Botões ---------- */
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: none;
+  border-radius: 999px;
+  padding: 0.7rem 1.5rem;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--c-purple-600), var(--c-purple-900));
+  color: var(--c-white);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--c-purple-700), var(--c-purple-950));
+}
+
+.btn-danger {
+  background: var(--c-white);
+  color: var(--c-red);
+  border: 1.5px solid #f0c9c6;
+}
+
+.btn-danger:hover {
+  background: #fdf2f1;
+}
+
+.btn-outline {
+  background: var(--c-white);
+  color: var(--c-purple-700);
+  border: 1.5px solid var(--c-lilac-200);
+}
+
+.btn-outline:hover {
+  background: var(--c-lilac-50);
+}
+
+.btn-outline.btn-outline--danger {
+  color: var(--c-red);
+  border-color: #f0c9c6;
+}
+
+.btn-outline.btn-outline--danger:hover {
+  background: #fdf2f1;
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+.actions {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin: 1rem 0 0;
+}
+
+.link-muted {
+  color: #7a6a94;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.link-muted:hover {
+  color: var(--c-purple-600);
+}
+
+/* ---------- Lista de documentos ---------- */
+
+.doc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.doc-list li {
+  border-bottom: 1px solid var(--c-lilac-100);
+}
+
+.doc-list li:last-child {
+  border-bottom: none;
+}
+
+.doc-list a.doc-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.95rem 0.25rem;
+  text-decoration: none;
+  color: var(--c-purple-950);
+}
+
+.doc-list a.doc-row:hover .doc-title {
+  color: var(--c-purple-600);
+}
+
+.doc-title {
+  font-weight: 600;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: #7a6a94;
+}
+
+/* ---------- Badges de status ---------- */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.badge::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  margin-right: 0.4rem;
+  border-radius: 50%;
+  background: currentColor;
+  flex: none;
+}
+
+.badge--pendente {
+  background: var(--c-lilac-100);
+  color: var(--c-purple-700);
+}
+
+.badge--processando {
+  background: var(--c-lilac-200);
+  color: var(--c-purple-700);
+}
+
+.badge--concluido {
+  background: #e7f6ec;
+  color: #1e7a3e;
+}
+
+.badge--erro {
+  background: #fbe9e8;
+  color: var(--c-red);
+}
+
+/* ---------- Mensagens (flash messages) ---------- */
+
+.messages {
+  list-style: none;
+  margin: 0 0 1.25rem;
+  padding: 0;
+}
+
+.messages li {
+  padding: 0.65rem 0.9rem;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  background: var(--c-lilac-50);
+  color: var(--c-purple-900);
+  border: 1px solid var(--c-lilac-200);
+}
+
+.messages li.error {
+  background: #fbe9e8;
+  color: var(--c-red);
+  border-color: #f0c9c6;
+}
+
+/* ---------- Resumo de IA ---------- */
+
+.summary {
+  background: var(--c-lilac-50);
+  border: 1px solid var(--c-lilac-200);
+  border-radius: 14px;
+  padding: 1.1rem 1.25rem;
+  line-height: 1.6;
+}
+
+.error-text {
+  color: var(--c-red);
+  background: #fbe9e8;
+  border-radius: 10px;
+  padding: 0.8rem 1rem;
+  font-size: 0.92rem;
+}
+
+/* Trechos usados na resposta do RAG (escondido atrás de um "ver fontes") */
+.fontes {
+  margin-top: 1rem;
+}
+
+.fontes summary {
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--c-purple-600);
+  list-style: none;
+}
+
+.fontes summary::-webkit-details-marker {
+  display: none;
+}
+
+.fontes summary::before {
+  content: "▸ ";
+}
+
+.fontes[open] summary::before {
+  content: "▾ ";
+}
+
+.fontes .doc-list {
+  margin-top: 0.75rem;
+}
+
+@media (max-width: 480px) {
+  .hero__inner {
+    flex-direction: column;
+  }
+
+  .session {
+    text-align: left;
+  }
+
+  .card {
+    padding: 1.75rem 1.4rem;
+  }
+}

@@ -1,0 +1,22 @@
+Django>=6.1,<6.2
+groq>=0.11
+python-dotenv>=1.0
+pypdf>=4.0
+python-docx>=1.1
+
+# OCR de PDFs escaneados: além destas libs Python, também é preciso
+# instalar os binários de sistema `tesseract-ocr` e `poppler-utils`
+# (ver README).
+pytesseract>=0.3
+pdf2image>=1.17
+
+# Conversão PDF <-> Word: pdf2docx (Python) + LibreOffice (binário de sistema,
+# ver README) para a direção Word -> PDF.
+pdf2docx>=0.5
+
+# Planilhas
+openpyxl>=3.1
+
+# RAG: chunking + embeddings locais (multilíngue) + busca por similaridade
+sentence-transformers>=3.0
+numpy>=1.26

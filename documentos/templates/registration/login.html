@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Entrar - DocIA{% endblock %}
+{% block hero_tagline %}<p class="hero__tagline">Entre para ver seus documentos.</p>{% endblock %}
+
+{% block content %}
+    <h1>Entrar</h1>
+
+    {% if form.errors %}
+        <p class="error-text">Usuário ou senha inválidos.</p>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="hidden" name="next" value="{{ next }}">
+        <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+    </form>
+
+    <p style="margin-top: 1.5rem;">
+        Não tem conta? <a href="{% url 'cadastro' %}">Cadastre-se</a>
+    </p>
+{% endblock %}
